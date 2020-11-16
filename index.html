@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title> QRCode </title>
+	<script type="text/javascript" src="instascan.min.js"> </script>
+</head>
+
+
+<body>
+	<video id="preview"></video>
+
+	<script>
+		let scanner = new Instascan.Scanner( 
+		{
+            video: document.getElementById('preview')
+          }
+        );
+        scanner.addListener('scan', function(content) {
+          alert.('QrCode Escaneado: ' + content);
+          windows.open(content, "_blank");
+        });
+        Instascan.Camera.getCameras().then(cameras => 
+		{
+          if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+          } else {
+            console.error("Camera não disponivel.");
+          }
+        });
+	
+	</script>
+
+</body>
+
+</html>
